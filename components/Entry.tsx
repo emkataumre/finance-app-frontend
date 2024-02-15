@@ -4,7 +4,7 @@ import { EntryParams } from "../types/EntryParams";
 
 export const Entry = ({ item }: EntryParams) => {
   return (
-    <View>
+    <View style={styles.entryContainer}>
       <Text>{item.name}</Text>
       <Text>{item.amount}</Text>
       <Text>{item.comment}</Text>
@@ -15,6 +15,5 @@ export const Entry = ({ item }: EntryParams) => {
 };
 
 const styles = StyleSheet.create({
-  title: {},
-  item: {},
+  entryContainer: { backgroundColor: "red" },
 });
