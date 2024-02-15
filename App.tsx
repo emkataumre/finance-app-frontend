@@ -1,48 +1,48 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import EntryListScreen from "./screens/EntryListScreen";
+import EntryEditScreen from "./screens/EntryEditScreen";
+import EntryDeleteScreen from "./screens/EntryDeleteScreen";
 import { RootStackParamList } from "./types/RootStackParamList";
-import EntryList from "./pages/EntryList";
-import EntryEdit from "./pages/EntryEdit";
-import EntryDelete from "./pages/EntryDelete";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Cathegories from "./pages/Cathegories";
-import { CathegoriesParam } from "./types/CathegoriesParam";
-
-const RootStack = createNativeStackNavigator<RootStackParamList>();
-const CathegoriesStack = createNativeStackNavigator<CathegoriesParam>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
-
-const EntryStackNavigator = () => {
-  return (
-    <RootStack.Navigator initialRouteName="EntryList">
-      <RootStack.Screen name="EntryList" component={EntryList} />
-      <RootStack.Screen
-        name="EntryEdit"
-        component={EntryEdit}
-        initialParams={{ EntryId: 1 }}
-      />
-      <RootStack.Screen name="EntryDelete" component={EntryDelete} />
-    </RootStack.Navigator>
-  );
-};
-
-const CathegoriesNavigator = () => {
-  return (
-    <CathegoriesStack.Navigator>
-      <CathegoriesStack.Screen name="Cathegory" component={Cathegories} />
-    </CathegoriesStack.Navigator>
-  );
-};
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={EntryStackNavigator} />
-        <Tab.Screen name="Cathegories" component={CathegoriesNavigator} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            options={{ title: "Overview" }}
+            name="EntryListScreen"
+            component={EntryListScreen}
+          />
+          <Stack.Screen
+            options={{ title: "Edit Entries" }}
+            name="EntryEditScreen"
+            component={EntryEditScreen}
+          />
+          <Stack.Screen
+            options={{ title: "Delete Entries" }}
+            name="EntryDeleteScreen"
+            component={EntryDeleteScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="EntryEditScreen"
+            options={{ title: "Edit Entries" }}
+            component={EntryEditScreen}
+          />
+          <Tab.Screen name="EntryDeleteScreen" component={EntryDeleteScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 

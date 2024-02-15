@@ -1,5 +1,5 @@
 export type RootStackParamList = {
-  EntryList: { sort: "latest" | "top" } | undefined;
-  EntryDelete: { EntryId: number };
-  EntryEdit: { EntryId: number };
+  EntryListScreen: { sort: "latest" | "top" } | undefined;
+  EntryDeleteScreen: { EntryId: number };
+  EntryEditScreen: { EntryId: number };
 };
