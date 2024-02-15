@@ -8,6 +8,11 @@ const EntryListScreen = () => {
   return (
     <View>
       <Text>EntryListScreen</Text>
+      <GoToButton
+        locationName="Edit"
+        screenName="EntryEditScreen"
+        navigation={navigation}
+      ></GoToButton>
     </View>
   );
 };
