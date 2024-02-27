@@ -1,7 +1,7 @@
 export class CreateCategoryDto {
-  title: string;
+  name: string;
 
-  constructor(title: string) {
-    this.title = title;
+  constructor(name: string) {
+    this.name = name;
   }
 }

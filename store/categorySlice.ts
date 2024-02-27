@@ -27,6 +27,14 @@ export const createCategory = createAsyncThunk(
   }
 );
 
+export const deleteCategory = createAsyncThunk(
+  "delteCategory",
+  async (id: number, thunkAPI) => {
+    await CategoriesAPI.deleteCategory(id);
+    return id;
+  }
+);
+
 export const categorySlice = createSlice({
   name: "category",
   initialState,
@@ -34,10 +42,15 @@ export const categorySlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload;
-    }),
-      builder.addCase(createCategory.fulfilled, (state, action) => {
-        state.categories.push(action.payload);
-      });
+    });
+    builder.addCase(createCategory.fulfilled, (state, action) => {
+      state.categories.push(action.payload);
+    });
+    builder.addCase(deleteCategory.fulfilled, (state, action) => {
+      state.categories = state.categories.filter(
+        (category) => category.id !== action.payload
+      );
+    });
   },
 });
 

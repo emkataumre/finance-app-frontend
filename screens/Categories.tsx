@@ -26,8 +26,6 @@ export function Categories() {
     dispatch(fetchCategories());
   }, []);
 
-  console.log("from Screen", categories);
-
   return (
     <View>
       <TextInput
@@ -43,7 +41,9 @@ export function Categories() {
       <SafeAreaView>
         <FlatList
           data={categories}
-          renderItem={({ item }) => <CategoryItem name={item.name} />}
+          renderItem={({ item }) => (
+            <CategoryItem name={item.name} id={item.id} />
+          )}
           keyExtractor={(item) => item.id.toString()}
         />
       </SafeAreaView>
