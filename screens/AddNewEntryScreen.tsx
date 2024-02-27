@@ -1,7 +1,9 @@
-import { View, StyleSheet, SafeAreaView, TextInput } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, StyleSheet, SafeAreaView } from "react-native";
+import React, { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePickerComponent from "../components/DateTimePickerComponent";
+import TextInputComponent from "../components/TextInput";
+import { Currency } from "../types/misc";
 
 const AddNewEntryScreen = () => {
   const [data, setData] = useState();
@@ -15,19 +17,19 @@ const AddNewEntryScreen = () => {
     setAmount(text);
   };
 
-  const handleDateChange = (date: any) => {
+  const handleDateChange = (date: Date) => {
     setSelectedDate(date);
   };
 
-  const handleCurrencyChange = (currency: any) => {
+  const handleCurrencyChange = (currency: string) => {
     setCurrency(currency);
   };
 
-  const handleNameChange = (name: any) => {
+  const handleNameChange = (name: string) => {
     setName(name);
   };
 
-  const handleCommentChange = (comment: any) => {
+  const handleCommentChange = (comment: string) => {
     setComment(comment);
   };
 
@@ -64,8 +66,7 @@ const AddNewEntryScreen = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView>
-        <TextInput
-          style={styles.input}
+        <TextInputComponent
           placeholder="Amount"
           keyboardType="numbers-and-punctuation"
           onChangeText={handleAmountChange}
@@ -73,20 +74,17 @@ const AddNewEntryScreen = () => {
         <DateTimePickerComponent
           onChange={handleDateChange}
         ></DateTimePickerComponent>
-        <TextInput
-          style={styles.input}
+        <TextInputComponent
           placeholder="Currency"
           keyboardType="default"
           onChangeText={handleCurrencyChange}
         />
-        <TextInput
-          style={styles.input}
+        <TextInputComponent
           placeholder="Name"
           keyboardType="default"
           onChangeText={handleNameChange}
         />
-        <TextInput
-          style={styles.input}
+        <TextInputComponent
           placeholder="Comment"
           keyboardType="default"
           onChangeText={handleCommentChange}
@@ -107,13 +105,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    minWidth: 200,
-    borderWidth: 1,
-    padding: 10,
   },
 });
 

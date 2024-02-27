@@ -9,34 +9,39 @@ import { RootStackParamList } from "./types/RootStackParamList";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Button } from "react-native";
 import AddNewEntryScreen from "./screens/AddNewEntryScreen";
+import { store } from "./store/store";
+import { Provider } from "react-redux";
+import { Categories } from "./screens/Categories";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
 
 const App: React.FC = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName: "list-sharp" | "add" | undefined;
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName: "list-sharp" | "add" | undefined;
 
-            if (route.name === "List") {
-              iconName = "list-sharp";
-            } else if (route.name === "New") {
-              iconName = "add";
-            }
+              if (route.name === "List") {
+                iconName = "list-sharp";
+              } else if (route.name === "New") {
+                iconName = "add";
+              }
 
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: "tomato",
-          tabBarInactiveTintColor: "gray",
-        })}
-      >
-        <Tab.Screen name="List" component={ListStackNavigator} />
-        <Tab.Screen name="New" component={AddNewEntryScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: "tomato",
+            tabBarInactiveTintColor: "gray",
+          })}
+        >
+          <Tab.Screen name="List" component={ListStackNavigator} />
+          <Tab.Screen name="New" component={Categories} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 

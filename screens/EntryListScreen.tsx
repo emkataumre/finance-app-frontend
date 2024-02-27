@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { GoToButton } from "../components/GoToButton";
 import { useNavigation } from "@react-navigation/native";
 import { Entry } from "../components/Entry";
+import axios from "axios";
 
 const EntryListScreen = () => {
   const navigation = useNavigation();
@@ -10,16 +11,16 @@ const EntryListScreen = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/entry", {
+      const response = await axios.get("http://172.20.10.2:3000/entry", {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const jsonData = response.json();
-      setData(await jsonData);
-    } catch (error) {}
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
-
   useEffect(() => {
     fetchData();
   }, []);
