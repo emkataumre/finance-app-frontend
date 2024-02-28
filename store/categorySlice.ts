@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import { Category } from "../entities/category";
 import { CategoriesAPI } from "../api/categoryAPI";
 import { CreateCategoryDto } from "../dtos/CreateCategoryDto";
@@ -12,7 +11,6 @@ const initialState: CategoryState = {
   categories: [],
 };
 
-// First, create the thunk
 export const fetchCategories = createAsyncThunk(
   "fetchCategories",
   async (thunkAPI) => {

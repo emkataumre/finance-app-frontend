@@ -1,13 +1,16 @@
-import { View, Text, Button, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { GoToButton } from "../components/GoToButton";
 import { useNavigation } from "@react-navigation/native";
 import { Entry } from "../components/Entry";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const EntryListScreen = () => {
   const navigation = useNavigation();
   const [data, setData] = useState<[]>();
+  const entries = useSelector((state: RootState) => state.entries);
 
   const fetchData = async () => {
     try {
