@@ -2,35 +2,28 @@ import { View, StyleSheet, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { GoToButton } from "../components/GoToButton";
 import { useNavigation } from "@react-navigation/native";
-import { Entry } from "../components/Entry";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { fetchEntries } from "../store/entrySlice";
+import EntryItem from "../components/EntryItem";
 
 const EntryListScreen = () => {
   const navigation = useNavigation();
-  const [data, setData] = useState<[]>();
-  const entries = useSelector((state: RootState) => state.entries);
+  const entries = useSelector((state: RootState) => state.entries.entries);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://172.20.10.2:3000/entry", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      setData(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
   useEffect(() => {
-    fetchData();
+    dispatch(fetchEntries());
   }, []);
+
+  console.log("in EntryListScreen", entries);
 
   return (
     <View style={styles.container}>
-      <FlatList data={data} renderItem={({ item }) => <Entry item={item} />} />
+      <FlatList
+        data={entries}
+        renderItem={({ item }) => <EntryItem item={item} />}
+      />
       <GoToButton
         locationName="Edit"
         screenName="EntryEditScreen"

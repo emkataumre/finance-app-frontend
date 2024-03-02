@@ -38,7 +38,7 @@ const App: React.FC = () => {
           })}
         >
           <Tab.Screen name="List" component={ListStackNavigator} />
-          <Tab.Screen name="New" component={Categories} />
+          <Tab.Screen name="New" component={AddNewEntryScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>

@@ -4,17 +4,22 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePickerComponent from "../components/DateTimePickerComponent";
 import TextInputComponent from "../components/TextInput";
 import { Currency } from "../types/misc";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../store/store";
+import { createEntry } from "../store/entrySlice";
+import { CreateEntryDto } from "../dtos/CreateEntryDto";
 
 const AddNewEntryScreen = () => {
-  const [data, setData] = useState();
-  const [amount, setAmount] = useState("");
+  const entries = useSelector((state: RootState) => state.entries);
+  const [amount, setAmount] = useState(0);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currency, setCurrency] = useState("");
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleAmountChange = (text: string) => {
-    setAmount(text);
+    setAmount(parseFloat(text)); // fixes the required "string" type on line 67(onChangeText)
   };
 
   const handleDateChange = (date: Date) => {
@@ -33,35 +38,12 @@ const AddNewEntryScreen = () => {
     setComment(comment);
   };
 
-  const postData = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/entry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amount,
-          selectedDate,
-          currency,
-          name,
-          comment,
-        }),
-      });
-      const jsonData = response.json();
-      setData(await jsonData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleIconPress = () => {
-    console.log("amount", amount);
-    console.log("date", selectedDate);
-    console.log("currency", currency);
-    console.log("name", name);
-    console.log("comment", comment);
-    postData();
+    dispatch(
+      createEntry(
+        new CreateEntryDto(amount, selectedDate, currency, name, comment)
+      )
+    );
   };
   return (
     <View style={styles.container}>
