@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Button,
@@ -10,11 +10,11 @@ import {
 } from "react-native";
 import { AppDispatch, RootState } from "../store/store";
 import { createCategory, fetchCategories } from "../store/categorySlice";
-import { CategoryItem } from "../components/CategoryItem";
 import { CreateCategoryDto } from "../dtos/CreateCategoryDto";
+import CategoryItem from "../components/CategoryItem";
 
-export function Categories() {
-  const [text, onChangeText] = React.useState("Useless Text");
+const Categories = () => {
+  const [text, onChangeText] = useState("Useless Text");
   const categories = useSelector(
     (state: RootState) => state.categories.categories
   );
@@ -48,7 +48,7 @@ export function Categories() {
       </SafeAreaView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   input: {
@@ -58,3 +58,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+export default Categories;

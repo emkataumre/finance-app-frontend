@@ -11,7 +11,6 @@ import { Button } from "react-native";
 import AddNewEntryScreen from "./screens/AddNewEntryScreen";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
-import { Categories } from "./screens/Categories";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();

@@ -1,14 +1,14 @@
 export class Entry {
   id: number;
   amount: number;
-  date: Date;
+  date: string;
   currency: string;
   name: string;
   comment: string;
   constructor(
     id: number,
     amount: number,
-    date: Date,
+    date: string,
     currency: string,
     name: string,
     comment: string

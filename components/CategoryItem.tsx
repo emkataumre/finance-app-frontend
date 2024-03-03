@@ -6,8 +6,7 @@ import { AppDispatch } from "../store/store";
 
 type CategoryProps = { name: string; id: number };
 
-export function CategoryItem(props: CategoryProps) {
-  const { name, id } = props;
+const CategoryItem = ({ name, id }: CategoryProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   return (
@@ -19,7 +18,7 @@ export function CategoryItem(props: CategoryProps) {
       ></Button>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CreateEntryDto } from "../dtos/CreateEntryDto";
+import { UpdateEntryDto } from "../dtos/UpdateEntryDto";
 
 export class EntriesAPI {
   static baseUrl = "http://192.168.246.220:3000/entry";
@@ -16,7 +17,10 @@ export class EntriesAPI {
 
   static async deleteEntry(id: number) {
     const response = await axios.delete(`${this.baseUrl}/${id}`);
-
     return response.data;
+  }
+
+  static async updateEntry(id: number, entry: UpdateEntryDto) {
+    const response = await axios.put(`${this.baseUrl}/${id}`);
   }
 }

@@ -10,12 +10,11 @@ import { createEntry } from "../store/entrySlice";
 import { CreateEntryDto } from "../dtos/CreateEntryDto";
 
 const AddNewEntryScreen = () => {
-  const entries = useSelector((state: RootState) => state.entries);
   const [amount, setAmount] = useState(0);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currency, setCurrency] = useState("");
   const [name, setName] = useState("");
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState("-");
   const dispatch = useDispatch<AppDispatch>();
 
   const handleAmountChange = (text: string) => {

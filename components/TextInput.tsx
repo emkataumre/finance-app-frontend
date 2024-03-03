@@ -5,12 +5,14 @@ interface TextInputTypes {
   placeholder: string;
   keyboardType: KeyboardTypeOptions;
   onChangeText: (text: string) => void;
+  value?: string;
 }
 
 const TextInputComponent = ({
   placeholder,
   keyboardType,
   onChangeText,
+  value,
 }: TextInputTypes) => {
   return (
     <TextInput
@@ -18,6 +20,7 @@ const TextInputComponent = ({
       placeholder={placeholder}
       keyboardType={keyboardType}
       onChangeText={onChangeText}
+      value={value}
     />
   );
 };

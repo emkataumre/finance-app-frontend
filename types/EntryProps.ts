@@ -2,7 +2,7 @@ export interface EntryProps {
   item: {
     id: number;
     amount: number;
-    date: Date;
+    date: string;
     currency: string;
     name: string;
     comment: string;
