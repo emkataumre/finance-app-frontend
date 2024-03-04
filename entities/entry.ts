@@ -1,17 +1,20 @@
 export class Entry {
-  id: number;
+  id?: number;
   amount: number;
   date: string;
   currency: string;
   name: string;
   comment: string;
+  categoryId: number;
+
   constructor(
-    id: number,
     amount: number,
     date: string,
     currency: string,
     name: string,
-    comment: string
+    comment: string,
+    categoryId: number,
+    id?: number
   ) {
     this.id = id;
     this.amount = amount;
@@ -19,5 +22,6 @@ export class Entry {
     this.currency = currency;
     this.name = name;
     this.comment = comment;
+    this.categoryId = categoryId; // Store categoryId instead of the entire Category object
   }
 }

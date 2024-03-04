@@ -2,25 +2,26 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Entry } from "../entities/entry";
 import { EntriesAPI } from "../api/entryAPI";
 import { CreateEntryDto } from "../dtos/CreateEntryDto";
-import { EntryProps } from "../types/EntryProps";
 import { UpdateEntryDto } from "../dtos/UpdateEntryDto";
+import { CreateCategoryDto } from "../dtos/CreateCategoryDto";
+import { Category } from "../entities/category";
 
 export interface EntryState {
   entries: Entry[];
   item: Entry;
-  //item: Entry; I want it to be like this i think
   //item: EntryProps; Why is cant i use this
 }
 
 const initialState: EntryState = {
   entries: [],
   item: {
-    id: 0,
+    id: undefined,
     amount: 0,
     date: "",
     currency: "",
     name: "",
     comment: "",
+    categoryId: 0,
   },
 };
 
@@ -45,7 +46,12 @@ export const deleteEntry = createAsyncThunk(
 
 export const updateEntry = createAsyncThunk(
   "updateEntry",
-  async ({ id, entry }: { id: number; entry: UpdateEntryDto }) => {
+  async ({ id, entry }: { id?: number; entry: UpdateEntryDto }) => {
+    if (id === undefined) {
+      throw new Error(
+        "You are trying to update a non-existing entry(id is not defined)"
+      ); // Or handle it in a different way
+    }
     await EntriesAPI.updateEntry(id, entry);
     return entry;
   }

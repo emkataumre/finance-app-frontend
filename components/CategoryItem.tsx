@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { deleteCategory } from "../store/categorySlice";
 import { AppDispatch } from "../store/store";
 
-type CategoryProps = { name: string; id: number };
+type CategoryProps = { name: string; id?: number };
 
 const CategoryItem = ({ name, id }: CategoryProps) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,7 +14,7 @@ const CategoryItem = ({ name, id }: CategoryProps) => {
       <Text>{name}</Text>
       <Button
         title="Delete"
-        onPress={() => dispatch(deleteCategory(id))}
+        onPress={() => id !== undefined && dispatch(deleteCategory(id))}
       ></Button>
     </View>
   );

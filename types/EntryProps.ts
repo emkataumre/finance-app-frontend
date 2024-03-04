@@ -1,6 +1,6 @@
 export interface EntryProps {
   item: {
-    id: number;
+    id?: number;
     amount: number;
     date: string;
     currency: string;

@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePickerComponent from "../components/DateTimePickerComponent";
 import TextInputComponent from "../components/TextInput";
-import { Currency } from "../types/misc";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../store/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store/store";
 import { createEntry } from "../store/entrySlice";
 import { CreateEntryDto } from "../dtos/CreateEntryDto";
 

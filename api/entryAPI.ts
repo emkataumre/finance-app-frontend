@@ -3,7 +3,7 @@ import { CreateEntryDto } from "../dtos/CreateEntryDto";
 import { UpdateEntryDto } from "../dtos/UpdateEntryDto";
 
 export class EntriesAPI {
-  static baseUrl = "http://192.168.246.220:3000/entry";
+  static baseUrl = "http://172.20.10.2:3000/entry";
 
   static async fetchAll() {
     const response = await axios.get(this.baseUrl);

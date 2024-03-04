@@ -1,5 +1,5 @@
 export class UpdateEntryDto {
-  id: number;
+  id?: number;
   amount?: number;
   date?: Date;
   currency?: string;
@@ -7,7 +7,7 @@ export class UpdateEntryDto {
   comment?: string;
 
   constructor(
-    id: number,
+    id?: number,
     amount?: number,
     date?: Date,
     currency?: string,

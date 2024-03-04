@@ -6,6 +6,8 @@ import { EntryProps } from "../types/EntryProps";
 import { deleteEntry, setItem } from "../store/entrySlice";
 import { useNavigation } from "@react-navigation/native";
 import EntryEditScreen from "../screens/EntryEditScreen";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import AddNewEntryScreen from "../screens/AddNewEntryScreen";
 
 const EntryItem = (props: EntryProps) => {
   const { item } = props;
@@ -14,22 +16,29 @@ const EntryItem = (props: EntryProps) => {
 
   const handleEdit = () => {
     dispatch(setItem(item));
-    navigation.navigate(EntryEditScreen); //What is going on here
+    navigation.navigate("EntryEditScreen");
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Name: {props.item.name}</Text>
-      <Text style={styles.text}>Amount: {props.item.amount}</Text>
-      <Text style={styles.text}>Currency: {props.item.currency}</Text>
-      <Text style={styles.text}>Comment: {props.item.comment}</Text>
-      <Text style={styles.text}>Date: {props.item.date.toLocaleString()}</Text>
-      <Button
-        title="Delete"
-        onPress={() => dispatch(deleteEntry(props.item.id))}
-      ></Button>
-      <Button title="Edit" onPress={handleEdit}></Button>
-    </View>
+    <>
+      <View style={styles.container}>
+        <Text style={styles.text}>Name: {props.item.name}</Text>
+        <Text style={styles.text}>Amount: {props.item.amount}</Text>
+        <Text style={styles.text}>Currency: {props.item.currency}</Text>
+        <Text style={styles.text}>Comment: {props.item.comment}</Text>
+        <Text style={styles.text}>
+          Date: {props.item.date.toLocaleString()}
+        </Text>
+        <Button
+          title="Delete"
+          onPress={() =>
+            props.item.id !== undefined && dispatch(deleteEntry(props.item.id))
+          }
+        ></Button>
+        <Button title="Edit" onPress={handleEdit}></Button>
+      </View>
+      <View style={styles.iconContainer}></View>
+    </>
   );
 };
 
@@ -53,6 +62,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#333333",
+  },
+  iconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 13,
   },
 });
 

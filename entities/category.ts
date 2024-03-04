@@ -1,9 +1,13 @@
-export class Category {
-  id: number;
-  name: string;
+import { Entry } from "./entry";
 
-  constructor(id: number, name: string) {
-    this.id = id;
+export class Category {
+  id?: number;
+  name: string;
+  entries: Entry[];
+
+  constructor(name: string, entries: Entry[], id?: number) {
     this.name = name;
+    this.entries = entries;
+    this.id = id;
   }
 }

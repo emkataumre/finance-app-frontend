@@ -43,7 +43,7 @@ const Categories = () => {
           renderItem={({ item }) => (
             <CategoryItem name={item.name} id={item.id} />
           )}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.id!.toString()}
         />
       </SafeAreaView>
     </View>
